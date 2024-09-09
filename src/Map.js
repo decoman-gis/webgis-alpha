@@ -4,6 +4,7 @@ import WebMap from '@arcgis/core/WebMap';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 import esriConfig from "@arcgis/core/config"; 
 import LayerListWidget from './LayerList'; // Import LayerList component
+import plotXY from './PlotXY';
 
 const Map = () => {
   const viewDiv = useRef(null); // Reference for the div element
@@ -26,6 +27,7 @@ const Map = () => {
     // Wait for the view to load
     view.when(() => {
       LayerListWidget(view); // Call LayerList component to add it to the UI
+      plotXY(view);
     });
 
     return () => {

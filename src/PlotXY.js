@@ -7,7 +7,7 @@ const plotXY = (view) => {
   const point = new Point({
     x: 377930.18, // X coordinate in meters
     y: 2514656.07, // Y coordinate in meters
-    spatialReference: { wkid: 3857 } // Make sure the spatial reference matches your map's spatial reference
+    spatialReference: { wkid: 3440 } // Make sure the spatial reference matches your map's spatial reference
   });
 
   // Create a symbol for the point (customize this as needed)
