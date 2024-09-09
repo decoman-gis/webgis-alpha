@@ -1,12 +1,12 @@
 import React from 'react';
-import LayerListMap from './LayerListMap';
+import Map from './Map'; // Import the Map component
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <LayerListMap />
+    <div>
+      <Map /> {/* Render the Map component */}
     </div>
   );
-}
+};
 
 export default App;
