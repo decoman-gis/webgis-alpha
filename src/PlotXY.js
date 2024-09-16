@@ -1,42 +1,37 @@
 import React, { useState } from 'react';
 import Graphic from '@arcgis/core/Graphic';
 import Point from '@arcgis/core/geometry/Point';
-import './App.css'
+import './App.css';
 
-// Component that handles both input and plotting
 const CoordinateInputAndPlot = ({ view }) => {
   const [x, setX] = useState('');
   const [y, setY] = useState('');
 
   // Function to plot the XY coordinates
   const plotXY = (x, y) => {
-    // Define the point geometry using the provided X and Y coordinates
     const point = new Point({
-      x: x, // X coordinate
-      y: y, // Y coordinate
-      spatialReference: { wkid: 3440 } // Ensure it matches your map's spatial reference
+      x: x,
+      y: y,
+      spatialReference: { wkid: 3440 },
     });
 
     const markerSymbol = {
-      type: "simple-marker",
-      color: [0, 255, 0], // Green color for better visibility
-      size: "12px",
+      type: 'simple-marker',
+      color: [0, 255, 0],
+      size: '12px',
       outline: {
-        color: [255, 255, 255], // White outline
-        width: 1
-      }
+        color: [255, 255, 255],
+        width: 1,
+      },
     };
 
     const pointGraphic = new Graphic({
       geometry: point,
-      symbol: markerSymbol
+      symbol: markerSymbol,
     });
 
-    // Clear previous graphics and add the new point
     view.graphics.removeAll();
     view.graphics.add(pointGraphic);
-
-    // Optionally, center the map on the point
     view.goTo({ target: point, zoom: 15 });
   };
 
@@ -44,18 +39,12 @@ const CoordinateInputAndPlot = ({ view }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (x && y && view) {
-      plotXY(Number(x), Number(y)); // Plot the XY coordinates
+      plotXY(Number(x), Number(y));
     }
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit({ x, y });
-      }}
-      className="coordinate-form" // Using the CSS class defined in App.css
-    >
+    <form onSubmit={handleSubmit} className="coordinate-form">
       <div>
         <label htmlFor="x-coordinate">X Coordinate:</label>
         <input
@@ -66,7 +55,6 @@ const CoordinateInputAndPlot = ({ view }) => {
           placeholder="Enter X"
         />
       </div>
-
       <div>
         <label htmlFor="y-coordinate">Y Coordinate:</label>
         <input
@@ -77,12 +65,11 @@ const CoordinateInputAndPlot = ({ view }) => {
           placeholder="Enter Y"
         />
       </div>
-
       <button type="submit" className="action-button">
         Plot
       </button>
     </form>
   );
-}; 
+};
 
 export default CoordinateInputAndPlot;
